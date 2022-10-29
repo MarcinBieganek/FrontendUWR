@@ -1,0 +1,93 @@
+* 
+{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#first-section div
+{
+    color: white;
+}
+
+#first-section .box
+{
+    width: 250px;
+    height: 150px;
+    margin: 20px;
+    padding: 15px;
+}
+
+#first-section #first-box, 
+#first-section #third-box
+{
+    background-color: #00FF0F;
+    width: 220px;
+    height: 120px;
+}
+
+#first-section #second-box
+{
+    border: 10px dashed blue;
+    width: 200px;
+    height: 100px;
+}
+
+#second-section ul.animal-list > li::marker
+{
+    color: red;
+}
+
+#second-section ol li::marker
+{
+    color: green;
+}
+
+#second-section li > ul li::marker
+{
+    color: blue;
+}
+
+#second-section li li:first-child
+{
+    color: turquoise;
+}
+
+#third-section a.link
+{
+    text-decoration: none;
+    color: #437bc4;
+}
+
+#third-section a.link:visited
+{
+    color: violet;
+}
+
+#third-section a.link:hover
+{
+    text-decoration: underline;
+    color: red;
+}
+
+#third-section a.link::before
+{
+    content: "🔗";
+    display: inline-block;
+}
+
+#forth-section img.image
+{
+    min-width: 400px;
+    max-width: 1000px;
+    width: 50vw;
+    height: auto;   
+}
+
+html *
+{
+    font-size: 1rem;
+}
+
+h2
+{
+    font-size: 1.8rem;
+}
