@@ -79,3 +79,13 @@ div {
 .warning__paragraph {
     margin-left: 2rem;
 }
+
+.gallery__wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.gallery__wrapper img {
+    width: 100%;
+    height: 100%;
+}
