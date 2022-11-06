@@ -53,3 +53,7 @@ div {
 .figure {
     margin: 8px 20px;
 }
+
+.article {
+    clear: both;
+}
