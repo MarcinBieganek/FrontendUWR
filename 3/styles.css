@@ -41,3 +41,11 @@ div {
     background-color: #ECECF7;
     padding: 2rem;
 }
+
+.figure--right {
+    float: right;
+}
+
+.figure--left {
+    float: left;
+}
