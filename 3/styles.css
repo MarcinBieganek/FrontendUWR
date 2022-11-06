@@ -20,3 +20,11 @@ div {
 .navigation__item {
     list-style-type: none;
 }
+
+.navigation__link {
+    display: flex;
+    height: 4rem;
+    padding: 0 2rem 0 2rem;
+    align-items: center;
+    justify-content: center;
+}
