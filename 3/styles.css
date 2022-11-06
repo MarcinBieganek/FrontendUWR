@@ -1,8 +1,14 @@
 body {
     display: flex;
     flex-direction: column;
+    background-color: #FBF5F5;
 }
 
 div {
     display: flex;
+}
+
+.main_header {
+    background-color: white;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
 }
