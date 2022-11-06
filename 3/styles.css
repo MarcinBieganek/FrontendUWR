@@ -1,3 +1,7 @@
+html {
+    font-family: Roboto, Arial;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -11,6 +15,11 @@ div {
 .main_header {
     background-color: white;
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main_header__header {
+    text-align: center;
+    font-size: 2.5rem;
 }
 
 .navigation {
@@ -31,6 +40,7 @@ div {
     justify-content: center;
     text-decoration: none;
     color: black;
+    font-size: 1.5rem;
 }
 
 .navigation__link:hover {
@@ -40,6 +50,15 @@ div {
 .content__main {
     background-color: #ECECF7;
     padding: 2rem;
+}
+
+.content__main h2 {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.content__main h3 {
+    font-size: 1.5rem;
 }
 
 .figure--right {
@@ -52,6 +71,11 @@ div {
 
 .figure {
     margin: 8px 20px;
+}
+
+.figure__caption {
+    font-size: 0.8rem;
+    text-align: center;
 }
 
 .article {
@@ -70,6 +94,10 @@ div {
     background-color: #F4C5B7;
     border: 3px solid #FAF9F8;
     border-radius: 20px;
+}
+
+.warning__header {
+    text-align: center;
 }
 
 .warning__figure {
@@ -117,4 +145,6 @@ div {
     flex-direction: column;
     align-items: center;
     border-top: 1px solid black;
+    font-size: 0.7rem;
+    text-align: center;
 }
