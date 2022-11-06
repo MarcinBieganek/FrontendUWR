@@ -27,6 +27,8 @@ div {
     padding: 0 2rem 0 2rem;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    color: black;
 }
 
 .navigation__link:hover {
