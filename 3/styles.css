@@ -36,3 +36,8 @@ div {
 .navigation__link:hover {
     background-color: rgba(0,0,0,0.1);
 }
+
+.content__main {
+    background-color: #ECECF7;
+    padding: 2rem;
+}
