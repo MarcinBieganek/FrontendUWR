@@ -57,3 +57,25 @@ div {
 .article {
     clear: both;
 }
+
+.warning__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.warning {
+    width: 70%;
+    min-width: 500px;
+    background-color: #F4C5B7;
+    border: 3px solid #FAF9F8;
+    border-radius: 20px;
+}
+
+.warning__figure {
+    margin-top: 0;
+}
+
+.warning__paragraph {
+    margin-left: 2rem;
+}
