@@ -82,10 +82,29 @@ div {
 
 .gallery__wrapper {
     display: grid;
+    grid-template-areas: 
+        "one two four"
+        "one three three";
     grid-template-columns: repeat(3, 1fr);
 }
 
-.gallery__wrapper img {
+.gallery__first_item {
+    grid-area: one;
+}
+
+.gallery__second_item {
+    grid-area: two;
+}
+
+.gallery__third_item {
+    grid-area: three;
+}
+
+.gallery__forth_item {
+    grid-area: four;
+}
+
+.gallery__image {
     width: 100%;
     height: 100%;
 }
