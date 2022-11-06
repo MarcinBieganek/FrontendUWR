@@ -26,7 +26,7 @@ div {
 .navigation__link {
     display: flex;
     height: 4rem;
-    padding: 0 2rem 0 2rem;
+    padding: 0 2rem;
     align-items: center;
     justify-content: center;
     text-decoration: none;
@@ -48,4 +48,8 @@ div {
 
 .figure--left {
     float: left;
+}
+
+.figure {
+    margin: 8px 20px;
 }
