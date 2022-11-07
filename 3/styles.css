@@ -8,7 +8,7 @@ body {
     background-color: #FBF5F5;
 }
 
-div {
+.content {
     display: flex;
 }
 
@@ -144,6 +144,7 @@ div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     border-top: 1px solid black;
     font-size: 0.7rem;
     text-align: center;
