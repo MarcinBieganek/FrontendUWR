@@ -1,0 +1,145 @@
+html {
+    font-size: calc(1rem + 1vw);
+}
+
+.form__wrapper {
+    display: flex;
+    background-color: #FBF5F5;
+}
+
+.form {
+    margin: auto;
+    padding: 15px;
+    width: 80%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    grid-template-areas:
+        "form__header form__header"      
+        "name__label surname__label"
+        "name__input surname__input"
+        "email__label phone__label"
+        "email__input phone__input"
+        "reason__label reason__label"
+        "reason__select reason__select"
+        "message__label message__label"
+        "message__input message__input"
+        "newsletter__wrapper newsletter__wrapper"
+        "form__button form__button";
+}
+
+@media (max-width: 700px) {
+    .form {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas:
+      "form__header"      
+      "name__label" 
+      "name__input"
+      "surname__label"
+      "surname__input"
+      "email__label"
+      "email__input"
+      "phone__label"
+      "phone__input"
+      "reason__label"
+      "reason__select"
+      "message__label"
+      "message__input"
+      "newsletter__wrapper"
+      "form__button";
+    }
+  }
+
+.form__header {
+    text-align: center;
+    grid-area: form__header;
+    font-size: calc(1rem + 1vw);
+}
+
+.form__label {
+    font-size: calc(0.8rem + 0.4vw);
+}
+
+.form__input {
+    font-size: calc(0.6rem + 0.3vw);
+}
+
+.form__input:invalid {
+    border-color: red;
+}
+
+.name__label {
+    grid-area: name__label;
+}
+
+.name__input {
+    grid-area: name__input;
+}
+
+.surname__label {
+    grid-area: surname__label;
+}
+
+.surname__input {
+    grid-area: surname__input;
+}
+
+.email__label {
+    grid-area: email__label;
+}
+
+.email__input {
+    grid-area: email__input;
+}
+
+.phone__label {
+    grid-area: phone__label;
+}
+
+.phone__input {
+    grid-area: phone__input;
+}
+
+.reason__label {
+    grid-area: reason__label;
+}
+
+.reason__select {
+    grid-area: reason__select;
+}
+
+.message__label {
+    grid-area: message__label;
+}
+
+.message__input {
+    grid-area: message__input;
+}
+
+.newsletter__wrapper {
+    grid-area: newsletter__wrapper;
+    text-align: center;
+}
+
+@media (pointer: coarse) {
+    .newsletter__input {
+        width: 30px;
+        height: 30px;
+        border-width: 2px;
+    }
+  }
+
+.form__button {
+    grid-area: form__button;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    font-size: calc(0.6rem + 0.3vw);;
+}
+
+.form__button:hover {
+    background-color: #ADD8E6;
+}

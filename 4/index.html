@@ -8,6 +8,32 @@
         <title>Form</title>
     </head>
     <body>
-        <h1>Form</h1>
+        <div class="form__wrapper">
+            <form class="form">
+                <h1 class="form__header">Contact us!</h1>
+                <label for="name" class="form__label name__label">Name (required)</label>
+                <input type="text" id="name" name="name" class="form__input name__input" required >
+                <label for="surname" class="form__label surname__label">Surname</label>
+                <input type="text" id="surname" name="surname" class="form__input surname__input">
+                <label for="email" class="form__label email__label">Email (required)</label>
+                <input type="email" id="email" name="email" class="form__input email__input" required pattern="\S+@\S+\.\S+">
+                <label for="phone" class="form__label phone__label">Phone</label>
+                <input type="tel" id="phone" name="phone" class="form__input phone__input" pattern="[0-9]{9}">
+                <label for="reason-select" class="form__label reason__label">Reason (required):</label>
+                <select name="reasons" id="reason-select" class="form__input reason__select" required>
+                    <option value="">-- select an option --</option>
+                    <option value="complain">Complain</option>
+                    <option value="offer">Offer</option>
+                    <option value="other">Other</option>
+                </select>
+                <label for="message" class="form__label message__label">Message (required):</label>
+                <textarea id="message" name="message" class="form__input message__input" required></textarea>
+                <span class="newsletter__wrapper">
+                    <label for="newsletter" class="form__label">Subscribe to newsletter</label>
+                    <input type="checkbox" id="newsletter" name="newsletter" class="form__input newsletter__input">
+                </span>
+                <button type="submit" class="form__button">Submit</button>
+            </form>
+        </div>
     </body>
 </html>
