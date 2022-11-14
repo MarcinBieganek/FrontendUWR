@@ -4,11 +4,13 @@ html {
 
 .form__wrapper {
     display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #FBF5F5;
 }
 
 .form {
-    margin: auto;
+    margin: 2% 5%;
     padding: 15px;
     width: 80%;
     background-color: white;
@@ -130,7 +132,7 @@ html {
         height: 30px;
         border-width: 2px;
     }
-  }
+}
 
 .form__button {
     grid-area: form__button;
