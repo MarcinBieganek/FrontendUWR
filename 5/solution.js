@@ -68,6 +68,18 @@ function editProductName(id, name) {
     productsList[productIndex].number = number;
 }
 
+/**
+ * Edit product buy date.
+ * @param {number} id - Product id.
+ * @param {Date} buyDate - Product new buy date.
+ */
+ function editProductBuyDate(id, buyDate) {
+    let productIndex = productsList.findIndex(function (product) {
+        return product.id === id;
+    });
+    productsList[productIndex].buyDate = buyDate;
+}
+
 console.log(productsList);
 
 addProduct("Product 1", 2, Date.now(), false, 20.0);
