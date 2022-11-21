@@ -142,6 +142,27 @@ function calculateMoneySpentPerDate(date) {
             }, 0);
 }
 
+/**
+ * Modifies products with given ids with given callback function.
+ * @param {Array} idsList - List of ids of products to modify.
+ * @param {ProductModifireCallback} modFun - Callback function which modifies product.
+ */
+function modifyListOfProducts(idsList, modFun) {
+    productsList = productsList.map(function (product) {
+        if(idsList.includes(product.id)) {
+            return modFun(product);
+        }
+        return product;
+    });
+}
+
+/**
+ * Callback that modifies product.
+ * @callback ProductModifireCallback
+ * @param {Object} product - Product to modify.
+ * @returns {Object} Modified product.
+ */
+
 console.log(productsList);
 
 addProduct("Product 1", 2, new Date(), true, 20.0);
@@ -150,8 +171,12 @@ addProduct("Product 3", 1, new Date(), true);
 
 console.log(productsList);
 
-let c = calculateMoneySpentPerDate(new Date());
 
-console.log(c);
+let ids = [productsList[0].id, productsList[2].id];
 
+modifyListOfProducts(ids, function (product) {
+    product.number = product.number * 2;
+    return product;
+});
 
+console.log(productsList);
