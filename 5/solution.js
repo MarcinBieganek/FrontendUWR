@@ -41,6 +41,7 @@ function editProductName(id, name) {
     let productIndex = productsList.findIndex(function (product) {
         return product.id === id;
     });
+    if (productIndex === -1) return;
     productsList[productIndex].name = name;
 }
 
@@ -53,6 +54,7 @@ function editProductName(id, name) {
     let productIndex = productsList.findIndex(function (product) {
         return product.id === id;
     });
+    if (productIndex === -1) return;
     productsList[productIndex].bought = status;
 }
 
@@ -65,6 +67,7 @@ function editProductName(id, name) {
     let productIndex = productsList.findIndex(function (product) {
         return product.id === id;
     });
+    if (productIndex === -1) return;
     productsList[productIndex].number = number;
 }
 
@@ -77,6 +80,7 @@ function editProductName(id, name) {
     let productIndex = productsList.findIndex(function (product) {
         return product.id === id;
     });
+    if (productIndex === -1) return;
     productsList[productIndex].buyDate = buyDate;
 }
 
@@ -89,6 +93,6 @@ console.log(productsList);
 let i = productsList[0].id;
 
 editProductName(i, "New product");
-editProductStatus(i, true);
+editProductStatus(100, true);
 
 console.log(productsList);
