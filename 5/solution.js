@@ -22,8 +22,24 @@ function addProduct(name, number, buyDate, bought, itemPrice) {
     return id;
 }
 
+/**
+ * Delete product from products list.
+ * @param {number} id - Product id.
+ */
+function deleteProduct(id) {
+    productsList = productsList.filter(function (product) {
+        return product.id !== id;
+    });
+}
+
 console.log(productsList);
 
 addProduct("Product 1", 2, Date.now(), false, 20.0);
+
+console.log(productsList);
+
+let i = productsList[0].id;
+
+deleteProduct(i);
 
 console.log(productsList);
