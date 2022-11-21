@@ -32,6 +32,18 @@ function deleteProduct(id) {
     });
 }
 
+/**
+ * Edit product name.
+ * @param {number} id - Product id.
+ * @param {string} name - Product new name.
+ */
+function editProductName(id, name) {
+    let productIndex = productsList.findIndex(function (product) {
+        return product.id === id;
+    });
+    productsList[productIndex].name = name;
+}
+
 console.log(productsList);
 
 addProduct("Product 1", 2, Date.now(), false, 20.0);
@@ -40,6 +52,6 @@ console.log(productsList);
 
 let i = productsList[0].id;
 
-deleteProduct(i);
+editProductName(i, "New product");
 
 console.log(productsList);
