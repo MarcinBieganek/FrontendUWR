@@ -111,11 +111,26 @@ function getProductsToBuyToday() {
     });
 }
 
+/**
+ * Set product item price.
+ * @param {number} id - Product id.
+ * @param {number} price - Product item price.
+ */
+function setItemPrice(id, price) {
+    let productIndex = productsList.findIndex(function (product) {
+        return product.id === id;
+    });
+    if (productIndex === -1) return;
+    productsList[productIndex].itemPrice = price;
+}
+
+
+
 console.log(productsList);
 
 addProduct("Product 1", 2, new Date(), false, 20.0);
 addProduct("Product 2", 1, new Date(2023, 11, 17), false, 10.0);
-addProduct("Product 3", 1, new Date(), false, 300.0);
+addProduct("Product 3", 1, new Date(), false);
 
 console.log(productsList);
 
