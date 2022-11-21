@@ -100,14 +100,25 @@ function swapProductsPosition(id1, id2) {
     productsList.splice(product2Index, 1, product1);
 }
 
+/**
+ * Finds products to buy today.
+ * @returns {Array} List of products to buy today.
+ */
+function getProductsToBuyToday() {
+    const today = new Date();
+    return productsList.filter(function (product) {
+        return ((today.getDate() === product.buyDate.getDate()) && (today.getMonth() === product.buyDate.getMonth()) && (today.getFullYear() === product.buyDate.getFullYear()));
+    });
+}
+
 console.log(productsList);
 
-addProduct("Product 1", 2, Date.now(), false, 20.0);
-addProduct("Product 2", 1, Date.now(), false, 10.0);
-addProduct("Product 3", 1, Date.now(), false, 300.0);
+addProduct("Product 1", 2, new Date(), false, 20.0);
+addProduct("Product 2", 1, new Date(2023, 11, 17), false, 10.0);
+addProduct("Product 3", 1, new Date(), false, 300.0);
 
 console.log(productsList);
 
-swapProductsPosition(productsList[0].id, productsList[2].id);
+let thisYearProducts = getProductsToBuyToday();
 
-console.log(productsList);
+console.log(thisYearProducts);
