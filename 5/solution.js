@@ -84,15 +84,30 @@ function editProductName(id, name) {
     productsList[productIndex].buyDate = buyDate;
 }
 
+/**
+ * Swap to products on the products list.
+ * @param {number} id1 - First product id.
+ * @param {number} id2 - Second product id.
+ */
+function swapProductsPosition(id1, id2) {
+    let product1Index = productsList.findIndex(function (product) {
+        return product.id === id1;
+    });
+    let product2Index = productsList.findIndex(function (product) {
+        return product.id === id2;
+    });
+    let product1 = productsList.splice(product1Index, 1, productsList[product2Index]);
+    productsList.splice(product2Index, 1, product1);
+}
+
 console.log(productsList);
 
 addProduct("Product 1", 2, Date.now(), false, 20.0);
+addProduct("Product 2", 1, Date.now(), false, 10.0);
+addProduct("Product 3", 1, Date.now(), false, 300.0);
 
 console.log(productsList);
 
-let i = productsList[0].id;
-
-editProductName(i, "New product");
-editProductStatus(100, true);
+swapProductsPosition(productsList[0].id, productsList[2].id);
 
 console.log(productsList);
