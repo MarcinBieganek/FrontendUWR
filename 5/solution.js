@@ -124,16 +124,34 @@ function setItemPrice(id, price) {
     productsList[productIndex].itemPrice = price;
 }
 
-
+/**
+ * Calculates money spent on the given date.
+ * @param {Date} date - Day to calculate spent money.
+ * @returns {number} Money spent given day.
+ */
+function calculateMoneySpentPerDate(date) {
+    return productsList
+            .filter(function (product) {
+                return ((date.getDate() === product.buyDate.getDate()) && (date.getMonth() === product.buyDate.getMonth()) && (date.getFullYear() === product.buyDate.getFullYear()));
+            })
+            .reduce(function (sum, product) {
+                if(product.bought && typeof product.itemPrice !== 'undefined') {
+                    return sum + (product.number * product.itemPrice);
+                }
+                return sum;
+            }, 0);
+}
 
 console.log(productsList);
 
-addProduct("Product 1", 2, new Date(), false, 20.0);
+addProduct("Product 1", 2, new Date(), true, 20.0);
 addProduct("Product 2", 1, new Date(2023, 11, 17), false, 10.0);
-addProduct("Product 3", 1, new Date(), false);
+addProduct("Product 3", 1, new Date(), true);
 
 console.log(productsList);
 
-let thisYearProducts = getProductsToBuyToday();
+let c = calculateMoneySpentPerDate(new Date());
 
-console.log(thisYearProducts);
+console.log(c);
+
+
