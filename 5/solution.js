@@ -56,6 +56,18 @@ function editProductName(id, name) {
     productsList[productIndex].bought = status;
 }
 
+/**
+ * Edit product items number.
+ * @param {number} id - Product id.
+ * @param {number} number - Product new quantity.
+ */
+ function editProductNumber(id, number) {
+    let productIndex = productsList.findIndex(function (product) {
+        return product.id === id;
+    });
+    productsList[productIndex].number = number;
+}
+
 console.log(productsList);
 
 addProduct("Product 1", 2, Date.now(), false, 20.0);
