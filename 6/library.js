@@ -465,4 +465,39 @@ async function testOrder() {
     await order("Alice's Adventures In Wonderland") // Sorry! Not available
 }
 
-testOrder();
+//testOrder();
+
+async function bulkOrder(objects) {
+    let orders = objects.map(function(o) {
+        return order(o);
+    });
+
+    await Promise.all(orders);
+}
+
+async function testBulk() {
+    const book = addToLibrary({
+        type: 'book',
+        title: "alice's adventures in wonderland",
+        author: 'lewis carroll',
+        pages: 136
+    })
+    const movie = addToLibrary({
+        type: 'movie',
+        title: "alice in wonderland",
+        director: 'tim burton',
+        length: 108
+    })
+    const media = addToLibrary({
+        title: 'Media'
+    })
+
+    const startTime = Date.now();
+    await bulkOrder(["Alice's Adventures In Wonderland", "Alice In Wonderland", "Media"])
+    console.log(Date.now() - startTime) // Ok. 1000
+    console.log(book.available) // false
+    console.log(movie.available) // false
+    console.log(media.available) // false
+}
+
+testBulk();
