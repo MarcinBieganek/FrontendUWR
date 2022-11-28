@@ -1,9 +1,20 @@
 const libraryStore = [];
 
-String.prototype.capitalize = () => {
+String.prototype.capitalize = function() {
     return this.length === 0 ? '' : this[0].toUpperCase() + this.slice(1)
 }
 
+function capitalize(string) {
+    return string.length === 0 ? '' : string[0].toUpperCase() + string.slice(1)
+}
+
+console.log(capitalize('alice')) // 'Alice'
+console.log(capitalize('')) // ''
+
+console.log('alice'.capitalize()) // 'Alice'
+console.log(''.capitalize()) // ''
+
+/*
 class Media {
     constructor(props) {
         this.title = capitalizeSentence(props.title);
@@ -13,29 +24,29 @@ class Media {
 
     orderMedia() {
         return new Promise((resolve, reject) => {
-        if (this.available) {
-            setTimeout(function() {
-            this.available = false;
-            resolve();
-            }, 1000)
-            return;
-        }
+            if (this.available) {
+                setTimeout(function () {
+                    this.available = false;
+                    resolve();
+                }, 1000)
+                return;
+            }
 
-        reject("Not available")
+            reject("Not available")
         })
     }
 
     returnMedia() {
         return new Promise((resolve, reject) => {
-        if (!this.available) {
-            setTimeout(function() {
-            this.available = true;
-            resolve();
-            }, 1000)
-            return;
-        }
+            if (!this.available) {
+                setTimeout(function () {
+                    this.available = true;
+                    resolve();
+                }, 1000)
+                return;
+            }
 
-        reject("Already returned")
+            reject("Already returned")
         })
     }
 }
@@ -51,58 +62,59 @@ class Book {
 
     orderBook() {
         return new Promise((resolve, reject) => {
-        if (this.available) {
-            setTimeout(function() {
-            this.available = false;
-            resolve();
-            }, 1000)
-            return;
-        }
+            if (this.available) {
+                setTimeout(function () {
+                    this.available = false;
+                    resolve();
+                }, 1000)
+                return;
+            }
 
-        reject("Not available")
+            reject("Not available")
         })
     }
 
     returnBook() {
         return new Promise((resolve, reject) => {
-        if (!this.available) {
-            setTimeout(function() {
-            this.available = true;
-            resolve();
-            }, 1000)
-            return;
-        }
+            if (!this.available) {
+                setTimeout(function () {
+                    this.available = true;
+                    resolve();
+                }, 1000)
+                return;
+            }
 
-        reject("Already returned")
+            reject("Already returned")
         })
     }
 }
 
 const addToLibrary = (props) => {
-    switch(props.type) {
-        case "book": 
-        const media = new Book(props)
-        libraryStore.push(media)
-        return media;
-        case "movie": 
-        const media = new Movie(props)
-        libraryStore.push(media)
-        return media;
-        default: 
-        const media = new Media(props);
-        libraryStore.push(media)
-        return media;
+    switch (props.type) {
+        case "book":
+            const media = new Book(props)
+            libraryStore.push(media)
+            return media;
+        case "movie":
+            const media = new Movie(props)
+            libraryStore.push(media)
+            return media;
+        default:
+            const media = new Media(props);
+            libraryStore.push(media)
+            return media;
     }
 }
 
 function order(title) {
     for (let i = 0; i < libraryStore.length; i++) {
         if (libraryStore[i].title === title) {
-        libraryStore[i].orderMedia().then(
-            console.log("Order completed!")
-        ).catch((e) => {
-            console.log("Sorry! " + e)
-        })
+            libraryStore[i].orderMedia().then(
+                console.log("Order completed!")
+            ).catch((e) => {
+                console.log("Sorry! " + e)
+            })
         }
     }
 }
+*/
