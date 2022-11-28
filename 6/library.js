@@ -32,8 +32,8 @@ class Media {
     #ratings;
     #available;
 
-    constructor(props) {
-        this.#title = capitalizeSentence(props.title);
+    constructor({ title }) {
+        this.#title = capitalizeSentence(title);
         this.#ratings = [];
         this.#available = true;
     }
@@ -111,46 +111,75 @@ async function testMedia() {
     console.log(media.available) // true
 }
 
-testMedia();
-/*
+//testMedia();
 
-class Book {
-    constructor(props) {
-        this.title = capitalizeSentence(props.title);
-        this.author = capitalizeSentence(props.author);
-        this.pages = props.pages;
-        this.ratings = [];
-        this.available = true;
+
+class Book extends Media {
+    #author;
+    #pages;
+
+    constructor({ title, author, pages }) {
+        super({ title });
+        this.#author = capitalizeSentence(author);
+        this.#pages = pages;
+    }
+
+    get author() {
+        return this.#author;
+    }
+
+    get pages() {
+        return this.#pages;
     }
 
     orderBook() {
-        return new Promise((resolve, reject) => {
-            if (this.available) {
-                setTimeout(function () {
-                    this.available = false;
-                    resolve();
-                }, 1000)
-                return;
-            }
-
-            reject("Not available")
-        })
+        return super.orderMedia();
     }
 
     returnBook() {
-        return new Promise((resolve, reject) => {
-            if (!this.available) {
-                setTimeout(function () {
-                    this.available = true;
-                    resolve();
-                }, 1000)
-                return;
-            }
-
-            reject("Already returned")
-        })
+        return super.returnMedia();
     }
 }
+
+async function testBook() {
+    console.log("Test book =================");
+    const book = new Book({
+        title: "alice's adventures in wonderland",
+        author: 'lewis carroll',
+        pages: 136
+    })
+
+    console.log(book.title) // "Alice's Adventures In Wonderland"
+    console.log(book.ratings) // []
+    console.log(book.available) // true
+    console.log(book.author) // 'Lewis Carroll'
+    console.log(book.pages) // 136
+
+    book.addRating(9)
+    book.addRating(8.5)
+    console.log(book.ratings) // [9, 8.5]
+
+    book.title = "not alice"
+    book.ratings = [1, 1]
+    book.available = false
+    book.author = "Charles Dickens"
+    book.pages = 500
+    console.log(book.title) // "Alice's Adventures In Wonderland"
+    console.log(book.ratings) // [9, 8.5]
+    console.log(book.available) // true
+    console.log(book.author) // 'Lewis Carroll'
+    console.log(book.pages) // 136
+
+    await book.orderBook()
+    console.log(book.available) // false
+
+    await book.returnBook()
+    console.log(book.available) // true
+}
+
+testBook();
+
+/*
 
 const addToLibrary = (props) => {
     switch (props.type) {
