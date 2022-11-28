@@ -8,11 +8,23 @@ function capitalize(string) {
     return string.length === 0 ? '' : string[0].toUpperCase() + string.slice(1)
 }
 
+function capitalizeSentence(sentence) {
+    return sentence
+        .split(' ')
+        .map(function(word) {
+            return capitalize(word);
+        })
+        .join(' ');
+}
+
 console.log(capitalize('alice')) // 'Alice'
 console.log(capitalize('')) // ''
 
 console.log('alice'.capitalize()) // 'Alice'
 console.log(''.capitalize()) // ''
+
+console.log(capitalizeSentence('alice')) // 'Alice'
+console.log(capitalizeSentence('alice in Wonderland')) // 'Alice In Wonderland'
 
 /*
 class Media {
