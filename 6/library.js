@@ -122,7 +122,6 @@ async function testMedia() {
 
 //testMedia();
 
-
 class Book extends Media {
     #author;
     #pages;
@@ -436,8 +435,6 @@ function testBulk() {
 
 //testBulk();
 
-
-
 async function order(title) {
     try {
         await libraryStore
@@ -468,8 +465,8 @@ async function testOrder() {
 //testOrder();
 
 async function bulkOrder(objects) {
-    let orders = objects.map(function(o) {
-        return order(o);
+    const orders = objects.map(function(object) {
+        return order(object);
     });
 
     await Promise.all(orders);
@@ -500,4 +497,4 @@ async function testBulk() {
     console.log(media.available) // false
 }
 
-testBulk();
+//testBulk();
