@@ -311,24 +311,108 @@ function testError() {
 
 testError();
 
-/*
+
 
 const addToLibrary = (props) => {
-    switch (props.type) {
-        case "book":
-            const media = new Book(props)
-            libraryStore.push(media)
-            return media;
-        case "movie":
-            const media = new Movie(props)
-            libraryStore.push(media)
-            return media;
-        default:
-            const media = new Media(props);
-            libraryStore.push(media)
-            return media;
+    let media;
+    try {
+        switch (props.type) {
+            case "book":
+                media = new Book(props)
+                libraryStore.push(media)
+                return media;
+            case "movie":
+                media = new Movie(props)
+                libraryStore.push(media)
+                return media;
+            default:
+                media = new Media(props);
+                libraryStore.push(media)
+                return media;
+        }
+    } catch(e) {
+        console.log(e.message);
     }
 }
+
+function testAdd() {
+    const book = addToLibrary({
+        type: 'book',
+        title: "alice's adventures in wonderland",
+        author: 'lewis carroll',
+        pages: 136
+    })
+    const movie = addToLibrary({
+        type: 'movie',
+        title: "alice in wonderland",
+        director: 'tim burton',
+        length: 108
+    })
+    const media = addToLibrary({
+        title: 'Media'
+    })
+
+    console.log(libraryStore)
+    libraryStore.forEach(element => {
+        console.log(element.title);
+    });
+
+    const book1 = addToLibrary({
+        type: 'book',
+        author: 'lewis carroll',
+        pages: 136
+    }) // Wrong title
+    const book2 = addToLibrary({
+        type: 'book',
+        title: "alice's adventures in wonderland",
+        pages: 136
+    }) // Wrong author
+    const book3 = addToLibrary({
+        type: 'book',
+        title: "alice's adventures in wonderland",
+        author: 'lewis carroll',
+    }) // Wrong pages
+    const book4 = addToLibrary({
+        type: 'book',
+        title: "alice's adventures in wonderland",
+        author: 'lewis carroll',
+        pages: -10
+    }) // Wrong pages
+    const movie1 = addToLibrary({
+        type: 'movie',
+        director: 'tim burton',
+        length: 108
+    }) // Wrong title
+    const movie2 = addToLibrary({
+        type: 'movie',
+        title: "alice in wonderland",
+        length: 108
+    }) // Wrong director
+    const movie3 = addToLibrary({
+        type: 'movie',
+        title: "alice in wonderland",
+        director: 'tim burton',
+    }) // Wrong length
+    const movie4 = addToLibrary({
+        type: 'movie',
+        title: "alice in wonderland",
+        director: 'tim burton',
+        length: -10
+    }) // Wrong length
+    const media2 = addToLibrary({
+        title: 123
+    }) // Wrong title
+}
+
+//testAdd();
+
+function bulkAddToLibrary(objects) {
+    return objects.map(function(elem) {
+        return addToLibrary(elem);
+    });
+}
+
+/*
 
 function order(title) {
     for (let i = 0; i < libraryStore.length; i++) {
