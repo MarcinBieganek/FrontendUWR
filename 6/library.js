@@ -33,6 +33,9 @@ class Media {
     #available;
 
     constructor({ title }) {
+        if(typeof title !== 'string') {
+            throw new Error("Title should be a string!");
+        }
         this.#title = capitalizeSentence(title);
         this.#ratings = [];
         this.#available = true;
@@ -51,6 +54,12 @@ class Media {
     }
 
     addRating(rating) {
+        if(typeof rating !== 'number') {
+            throw new Error("Rating should be a number!");
+        }
+        if(rating <= 0) {
+            throw new Error("Rating should be positive!");
+        }
         this.#ratings.push(rating);
     }
 
@@ -119,6 +128,18 @@ class Book extends Media {
     #pages;
 
     constructor({ title, author, pages }) {
+        if(typeof title !== 'string') {
+            throw new Error("Title should be a string!");
+        }
+        if(typeof author !== 'string') {
+            throw new Error("Author should be a string!");
+        }
+        if(typeof pages !== 'number') {
+            throw new Error("Pages should be a number!");
+        }
+        if(pages <= 0) {
+            throw new Error("Pages should be positive!");
+        }
         super({ title });
         this.#author = capitalizeSentence(author);
         this.#pages = pages;
@@ -184,6 +205,18 @@ class Movie extends Media {
     #length;
 
     constructor({ title, director, length }) {
+        if(typeof title !== 'string') {
+            throw new Error("Title should be a string!");
+        }
+        if(typeof director !== 'string') {
+            throw new Error("Director should be a string!");
+        }
+        if(typeof length !== 'number') {
+            throw new Error("Length should be a number!");
+        }
+        if(length <= 0) {
+            throw new Error("Lenght should be positive!");
+        }
         super({ title });
         this.#director = capitalizeSentence(director);
         this.#length = length;
@@ -241,7 +274,42 @@ async function testMovie() {
     console.log(movie.available) // true
 }
 
-testMovie();
+//testMovie();
+
+function testError() {
+    //new Media();
+    //new Media({ title: 123 });
+    //new Book({ title: 123 });
+    //new Book({ title: "alice's adventures in wonderland" });
+    /*new Book({ 
+        title: "alice's adventures in wonderland",
+        author: 'Lewis Carroll',
+        pages: -10
+      });*/
+    /*new Book({ 
+        title: "alice's adventures in wonderland",
+        author: 'Lewis Carroll',
+      });*/
+    //new Movie({ title: 123 });
+    //new Movie({ title: 'Alice in wonderland' });
+    /*new Movie({ 
+        title: 'Alice in wonderland',
+        director: 'tim burton',
+        length: -10
+      });*/
+    /*new Movie({ 
+        title: 'Alice in wonderland',
+        director: 'tim burton',
+      });*/
+    /*new Media({ 
+        title: 'Alice in wonderland',
+      }).addRating(0);*/
+    /*new Media({ 
+        title: 'Alice in wonderland',
+      }).addRating([1,2,3]);*/
+}
+
+testError();
 
 /*
 
