@@ -412,6 +412,30 @@ function bulkAddToLibrary(objects) {
     });
 }
 
+function testBulk() {
+    const [book, movie, media] = bulkAddToLibrary([
+        {
+            type: 'book',
+            title: "alice's adventures in wonderland",
+            author: 'lewis carroll',
+            pages: 136
+        },
+        {
+            type: 'movie',
+            title: "alice in wonderland",
+            director: 'tim burton',
+            length: 108
+        },
+        {
+            title: 'Media'
+        }
+    ])
+
+    console.log(libraryStore)
+}
+
+testBulk();
+
 /*
 
 function order(title) {
