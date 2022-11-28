@@ -26,12 +26,32 @@ console.log(''.capitalize()) // ''
 console.log(capitalizeSentence('alice')) // 'Alice'
 console.log(capitalizeSentence('alice in Wonderland')) // 'Alice In Wonderland'
 
-/*
+
 class Media {
+    #title;
+    #ratings;
+    #available;
+
     constructor(props) {
-        this.title = capitalizeSentence(props.title);
-        this.ratings = [];
-        this.available = true;
+        this.#title = capitalizeSentence(props.title);
+        this.#ratings = [];
+        this.#available = true;
+    }
+
+    get title() {
+        return this.#title;
+    }
+
+    get ratings() {
+        return this.#ratings;
+    }
+
+    get available() {
+        return this.#available;
+    }
+
+    addRating(rating) {
+        this.#ratings.push(rating);
     }
 
     orderMedia() {
@@ -62,6 +82,24 @@ class Media {
         })
     }
 }
+
+const media = new Media({title: 'alice in wonderland'})
+console.log(media.title) // 'Alice In Wonderland'
+console.log(media.ratings) // []
+console.log(media.available) // true
+
+media.addRating(9)
+media.addRating(8.5)
+console.log(media.ratings) // [9, 8.5]
+
+media.title = "not alice"
+media.ratings = [1, 1]
+media.available = false
+console.log(media.title) // 'Alice In Wonderland'
+console.log(media.ratings) // [9, 8.5]
+console.log(media.available) // true
+
+/*
 
 class Book {
     constructor(props) {
