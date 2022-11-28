@@ -55,10 +55,11 @@ class Media {
     }
 
     orderMedia() {
+        let m = this;
         return new Promise((resolve, reject) => {
-            if (this.available) {
+            if (m.#available) {
                 setTimeout(function () {
-                    this.available = false;
+                    m.#available = false;
                     resolve();
                 }, 1000)
                 return;
@@ -69,10 +70,11 @@ class Media {
     }
 
     returnMedia() {
+        let m = this;
         return new Promise((resolve, reject) => {
-            if (!this.available) {
+            if (!m.#available) {
                 setTimeout(function () {
-                    this.available = true;
+                    m.#available = true;
                     resolve();
                 }, 1000)
                 return;
@@ -99,6 +101,17 @@ console.log(media.title) // 'Alice In Wonderland'
 console.log(media.ratings) // [9, 8.5]
 console.log(media.available) // true
 
+async function testMedia() {
+    const media = new Media({title: 'alice in wonderland'})
+
+    await media.orderMedia()
+    console.log(media.available) // false
+    
+    await media.returnMedia()
+    console.log(media.available) // true
+}
+
+testMedia();
 /*
 
 class Book {
