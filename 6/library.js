@@ -28,29 +28,29 @@ console.log(capitalizeSentence('alice in Wonderland')) // 'Alice In Wonderland'
 
 
 class Media {
-    #title;
-    #ratings;
-    #available;
+    _title;
+    _ratings;
+    _available;
 
     constructor({ title }) {
         if(typeof title !== 'string') {
             throw new Error("Title should be a string!");
         }
-        this.#title = capitalizeSentence(title);
-        this.#ratings = [];
-        this.#available = true;
+        this._title = capitalizeSentence(title);
+        this._ratings = [];
+        this._available = true;
     }
 
     get title() {
-        return this.#title;
+        return this._title;
     }
 
     get ratings() {
-        return this.#ratings;
+        return this._ratings;
     }
 
     get available() {
-        return this.#available;
+        return this._available;
     }
 
     addRating(rating) {
@@ -60,15 +60,15 @@ class Media {
         if(rating <= 0) {
             throw new Error("Rating should be positive!");
         }
-        this.#ratings.push(rating);
+        this._ratings.push(rating);
     }
 
     orderMedia() {
         let m = this;
         return new Promise((resolve, reject) => {
-            if (m.#available) {
+            if (m._available) {
                 setTimeout(function () {
-                    m.#available = false;
+                    m._available = false;
                     resolve();
                 }, 1000)
                 return;
@@ -81,9 +81,9 @@ class Media {
     returnMedia() {
         let m = this;
         return new Promise((resolve, reject) => {
-            if (!m.#available) {
+            if (!m._available) {
                 setTimeout(function () {
-                    m.#available = true;
+                    m._available = true;
                     resolve();
                 }, 1000)
                 return;
@@ -123,8 +123,8 @@ async function testMedia() {
 //testMedia();
 
 class Book extends Media {
-    #author;
-    #pages;
+    _author;
+    _pages;
 
     constructor({ title, author, pages }) {
         if(typeof title !== 'string') {
@@ -140,16 +140,16 @@ class Book extends Media {
             throw new Error("Pages should be positive!");
         }
         super({ title });
-        this.#author = capitalizeSentence(author);
-        this.#pages = pages;
+        this._author = capitalizeSentence(author);
+        this._pages = pages;
     }
 
     get author() {
-        return this.#author;
+        return this._author;
     }
 
     get pages() {
-        return this.#pages;
+        return this._pages;
     }
 
     orderBook() {
@@ -200,8 +200,8 @@ async function testBook() {
 //testBook();
 
 class Movie extends Media {
-    #director;
-    #length;
+    _director;
+    _length;
 
     constructor({ title, director, length }) {
         if(typeof title !== 'string') {
@@ -217,16 +217,16 @@ class Movie extends Media {
             throw new Error("Lenght should be positive!");
         }
         super({ title });
-        this.#director = capitalizeSentence(director);
-        this.#length = length;
+        this._director = capitalizeSentence(director);
+        this._length = length;
     }
 
     get director() {
-        return this.#director;
+        return this._director;
     }
 
     get length() {
-        return this.#length;
+        return this._length;
     }
 
     orderMovie() {
