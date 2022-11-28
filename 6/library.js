@@ -434,19 +434,35 @@ function testBulk() {
     console.log(libraryStore)
 }
 
-testBulk();
+//testBulk();
 
-/*
 
-function order(title) {
-    for (let i = 0; i < libraryStore.length; i++) {
-        if (libraryStore[i].title === title) {
-            libraryStore[i].orderMedia().then(
-                console.log("Order completed!")
-            ).catch((e) => {
-                console.log("Sorry! " + e)
-            })
-        }
+
+async function order(title) {
+    try {
+        await libraryStore
+            .find((e) => e.title === title)
+            .orderMedia();
+        
+        console.log("Order completed!");
+    } catch(e) {
+        console.log("Sorry! " + e)
     }
 }
-*/
+
+
+async function testOrder() {
+    const book = addToLibrary({
+        type: 'book',
+        title: "alice's adventures in wonderland",
+        author: 'lewis carroll',
+        pages: 136
+    })
+
+    console.log(book.available) // true
+    await order("Alice's Adventures In Wonderland")
+    console.log(book.available) // false
+    await order("Alice's Adventures In Wonderland") // Sorry! Not available
+}
+
+testOrder();
