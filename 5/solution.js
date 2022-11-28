@@ -18,7 +18,7 @@ function addProduct(name, number, buyDate, bought, itemPrice) {
         buyDate: buyDate,
         bought: bought,
         itemPrice: itemPrice
-    })
+    });
     return id;
 }
 
@@ -121,7 +121,9 @@ function setItemPrice(id, price) {
         return product.id === id;
     });
     if (productIndex === -1) return;
-    productsList[productIndex].itemPrice = price;
+    if (productsList[productIndex].bought) {
+        productsList[productIndex].itemPrice = price;
+    }
 }
 
 /**
@@ -143,8 +145,15 @@ function calculateMoneySpentPerDate(date) {
 }
 
 /**
+ * Callback that modifies product.
+ * @callback ProductModifireCallback
+ * @param {Object} product - Product to modify.
+ * @returns {Object} Modified product.
+ */
+
+/**
  * Modifies products with given ids with given callback function.
- * @param {Array} idsList - List of ids of products to modify.
+ * @param {number[]} idsList - List of ids of products to modify.
  * @param {ProductModifireCallback} modFun - Callback function which modifies product.
  */
 function modifyListOfProducts(idsList, modFun) {
@@ -156,12 +165,9 @@ function modifyListOfProducts(idsList, modFun) {
     });
 }
 
-/**
- * Callback that modifies product.
- * @callback ProductModifireCallback
- * @param {Object} product - Product to modify.
- * @returns {Object} Modified product.
- */
+
+
+
 
 console.log(productsList);
 
