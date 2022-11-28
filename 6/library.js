@@ -177,7 +177,71 @@ async function testBook() {
     console.log(book.available) // true
 }
 
-testBook();
+//testBook();
+
+class Movie extends Media {
+    #director;
+    #length;
+
+    constructor({ title, director, length }) {
+        super({ title });
+        this.#director = capitalizeSentence(director);
+        this.#length = length;
+    }
+
+    get director() {
+        return this.#director;
+    }
+
+    get length() {
+        return this.#length;
+    }
+
+    orderMovie() {
+        return super.orderMedia();
+    }
+
+    returnMovie() {
+        return super.returnMedia();
+    }
+}
+
+async function testMovie() {
+    const movie = new Movie({
+        title: "alice in wonderland",
+        director: 'tim burton',
+        length: 108
+    })
+
+    console.log(movie.title) // 'Alice In Wonderland'
+    console.log(movie.ratings) // []
+    console.log(movie.available) // true
+    console.log(movie.director) // 'Tim Burton'
+    console.log(movie.length) // 108
+
+    movie.addRating(9)
+    movie.addRating(8.5)
+    console.log(movie.ratings) // [9, 8.5]
+
+    movie.title = "not alice"
+    movie.ratings = [1, 1]
+    movie.available = false
+    movie.director = "Tommy Wiseau"
+    movie.length = 500
+    console.log(movie.title) // 'Alice In Wonderland'
+    console.log(movie.ratings) // [9, 8.5]
+    console.log(movie.available) // true
+    console.log(movie.director) // 'Tim Burton'
+    console.log(movie.length) // 108
+
+    await movie.orderMovie()
+    console.log(movie.available) // false
+
+    await movie.returnMovie()
+    console.log(movie.available) // true
+}
+
+testMovie();
 
 /*
 
