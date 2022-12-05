@@ -31,21 +31,60 @@ function deleteTask(id) {
 }
 
 /**
+ * Get task status.
+ * @param {number} id - Task id.
+ * @returns {boolean} Task status;
+ */
+function getTaskStatus(id) {
+    let todoIndex = todoList.findIndex(function (task) {
+        return task.id === id;
+    });
+    if (todoIndex === -1) return;
+    return todoList[todoIndex].done;
+}
+
+/**
+ * Edit task status.
+ * @param {number} id - Task id.
+ * @param {boolean} status - Task new staus.
+ */
+function editTaskStatus(id, status) {
+    let todoIndex = todoList.findIndex(function (task) {
+        return task.id === id;
+    });
+    if (todoIndex === -1) return;
+    todoList[todoIndex].done = status;
+}
+
+
+/**
  * Returns html todo list element.
  * @param {number} id - Task id.
  * @param {string} name - Task name.
  * @param {boolean} done - Is task done already.
  */
  function createTodo(id, name, done) {
+    function doneButtonText(done) {
+        return done ? "Revert" : "Done";
+    }
+
     const todo = document.createElement("li");
     todo.innerHTML = `<h4 class="todo__name">${name}</h3>`;
     todo.classList.add("todo__element");
+    if (done) todo.classList.add("todo__element-done");
     todo.id = id;
 
     const doneButton = document.createElement("button");
     doneButton.id = "todo_done__button";
     doneButton.classList.add("button", "todo_done__button");
-    doneButton.innerText = done ? "Done" : "Revert";
+    doneButton.innerText = doneButtonText(done);
+    doneButton.addEventListener("click", function (e) {
+        const newStatus = !getTaskStatus(id);
+        editTaskStatus(id, newStatus);
+        doneButton.innerText = doneButtonText(newStatus);
+        if (newStatus) todo.classList.add("todo__element-done");
+        else todo.classList.remove("todo__element-done");
+    })
     
     const deleteButton = document.createElement("button");
     deleteButton.id = "todo_delete__button";
@@ -53,7 +92,7 @@ function deleteTask(id) {
     deleteButton.innerText = "Remove";
     deleteButton.addEventListener("click", function (e) {
         deleteTask(id);
-        renderList();
+        todo.remove();
     })
 
     todo.append(doneButton, deleteButton);
