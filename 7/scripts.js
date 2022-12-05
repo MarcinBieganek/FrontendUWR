@@ -1,9 +1,11 @@
+// Html elements used
 const addForm = document.getElementById("add_form");
 const newNameInput = document.getElementById("todo_new_name");
 const todoListHtml = document.getElementById("todo__list");
 const clearAllButton = document.getElementById("clear_all__button");
 const countHeader = document.getElementById("todo_list__header");
 
+// todo list with task objects
 let todoList = JSON.parse(localStorage.getItem('todoList'));
 if (todoList === null) todoList = [];
 
@@ -80,17 +82,18 @@ function editTaskStatus(id, status) {
     function doneButtonText(done) {
         return done ? "Revert" : "Done";
     }
-
+    // Todo list element created
     const todo = document.createElement("li");
     todo.innerHTML = `<h4 class="todo__name">${name}</h3>`;
     todo.classList.add("todo__element");
     if (done) todo.classList.add("todo__element-done");
     todo.id = id;
-
+    // Todo done button created
     const doneButton = document.createElement("button");
     doneButton.id = "todo_done__button";
     doneButton.classList.add("button", "todo_done__button");
     doneButton.innerText = doneButtonText(done);
+    // On click task status is changed
     doneButton.addEventListener("click", function (e) {
         const newDone = !getTaskStatus(id);
         editTaskStatus(id, newDone);
@@ -99,17 +102,18 @@ function editTaskStatus(id, status) {
         else todo.classList.remove("todo__element-done");
         renderCount();
     })
-    
+    // Todo delete button created
     const deleteButton = document.createElement("button");
     deleteButton.id = "todo_delete__button";
     deleteButton.classList.add("button", "todo_delete__button");
     deleteButton.innerText = "Remove";
+    // On click task is deleted
     deleteButton.addEventListener("click", function (e) {
         deleteTask(id);
         todo.remove();
         renderCount();
     })
-
+    // Buttons added to todo element
     todo.append(doneButton, deleteButton);
     return todo;
 }
@@ -118,7 +122,9 @@ function editTaskStatus(id, status) {
  * Renders html todo list.
  */
 function renderList() {
+    // Reset HTML todo list content
     todoListHtml.innerHTML = '';
+    // Add tasks from todo list to HTML todo list
     todoList.map(function (task) {
         todoListHtml.append(createTodo(task.id, task.name, task.done));
     });
@@ -134,6 +140,9 @@ function renderCount() {
     countHeader.innerText = `${todosNotDone} tasks remaining`;
 }
 
+/**
+ * When add button is clicked new task is created and added.
+ */
 addForm.addEventListener("submit", function(e) {
     e.preventDefault();
     addTask(newNameInput.value, false);
@@ -142,11 +151,20 @@ addForm.addEventListener("submit", function(e) {
     renderCount();
 })
 
+/**
+ * When clear all button is clicked all tasks are removed.
+ */
 clearAllButton.addEventListener("click", function(e) {
     todoList = [];
+    saveTodoList();
     renderList();
     renderCount();
 })
 
-renderList();
-renderCount();
+/**
+ * When window is loaded all tasks are rendered.
+ */
+window.addEventListener("load", function(e) {
+    renderList();
+    renderCount();
+})
