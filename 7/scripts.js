@@ -84,7 +84,7 @@ function editTaskStatus(id, status) {
     }
     // Todo list element created
     const todo = document.createElement("li");
-    todo.innerHTML = `<h4 class="todo__name">${name}</h3>`;
+    todo.innerHTML = `<h4 class="todo__name">${name}</h4>`;
     todo.classList.add("todo__element");
     if (done) todo.classList.add("todo__element-done");
     todo.id = id;
