@@ -30,7 +30,7 @@ html {
             "name__input"
             "form__button";
     }
-  }
+}
 
 .main__header {
     text-align: center;
@@ -110,7 +110,7 @@ html {
             "todo__name todo__name" 
             "todo_done__button todo_remove__button";
     }
-  }
+}
 
 .todo__name {
     grid-area: todo__name;
