@@ -79,15 +79,16 @@ function editTaskStatus(id, status) {
  * @param {boolean} done - Is task done already.
  */
  function createTodo(id, name, done) {
-    function doneButtonText(done) {
-        return done ? "Revert" : "Done";
-    }
     // Todo list element created
     const todo = document.createElement("li");
     todo.innerHTML = `<h4 class="todo__name">${name}</h4>`;
     todo.classList.add("todo__element");
     if (done) todo.classList.add("todo__element-done");
     todo.id = id;
+
+    function doneButtonText(done) {
+        return done ? "Revert" : "Done";
+    }
     // Todo done button created
     const doneButton = document.createElement("button");
     doneButton.id = "todo_done__button";
@@ -102,6 +103,7 @@ function editTaskStatus(id, status) {
         else todo.classList.remove("todo__element-done");
         renderCount();
     })
+
     // Todo delete button created
     const deleteButton = document.createElement("button");
     deleteButton.id = "todo_delete__button";
@@ -113,6 +115,7 @@ function editTaskStatus(id, status) {
         todo.remove();
         renderCount();
     })
+
     // Buttons added to todo element
     todo.append(doneButton, deleteButton);
     return todo;
