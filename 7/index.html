@@ -11,9 +11,9 @@
     <body>
         <div class="main__wrapper">
             <h1 class="main__header">Yours TODO list!</h1>
-            <form class="add_form">
-                <label for="name" class="name__label">New task:</label>
-                <input type="text" id="name" name="newName" class="name__input" required >
+            <form id="add_form" class="add_form">
+                <label for="todo_new_name" class="name__label">New task:</label>
+                <input type="text" id="todo_new_name" name="todo_new_name" class="name__input" required >
                 <button class="button add__button">Add</button>
             </form>
             <div class="todo_list_header__wrapper">
@@ -21,11 +21,11 @@
                 <button class="button clear_all__button">Clear all</button>
             </div>
             <div class="todo_list__wrapper">
-                <ol class="todo__list">
+                <ol id="todo__list" class="todo__list">
                     <li class="todo__element">
                         <h4 class="todo__name">Todo 1</h3>
-                        <button class="button todo_done__button">Done</button>
-                        <button class="button todo_remove__button">Remove</button>
+                        <button id="todo_done__button" class="button todo_done__button">Done</button>
+                        <button id="todo_remove__button" class="button todo_remove__button">Remove</button>
                     </li>
                     <li class="todo__element">
                         <h4 class="todo__name">Todo 2</h3>
