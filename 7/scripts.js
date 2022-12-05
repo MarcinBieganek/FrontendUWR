@@ -1,6 +1,7 @@
 const addForm = document.getElementById("add_form");
 const newNameInput = document.getElementById("todo_new_name");
 const todoListHtml = document.getElementById("todo__list");
+const clearAllButton = document.getElementById("clear_all__button");
 
 let todoList = [];
 
@@ -113,5 +114,10 @@ addForm.addEventListener("submit", function(e) {
     e.preventDefault();
     addTask(newNameInput.value, false);
     newNameInput.value = "";
+    renderList();
+})
+
+clearAllButton.addEventListener("click", function(e) {
+    todoList = [];
     renderList();
 })
