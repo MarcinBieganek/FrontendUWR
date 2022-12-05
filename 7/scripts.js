@@ -4,7 +4,15 @@ const todoListHtml = document.getElementById("todo__list");
 const clearAllButton = document.getElementById("clear_all__button");
 const countHeader = document.getElementById("todo_list__header");
 
-let todoList = [];
+let todoList = JSON.parse(localStorage.getItem('todoList'));
+if (todoList === null) todoList = [];
+
+/**
+ * Saves todo list to localStorage.
+ */
+function saveTodoList() {
+    localStorage.setItem('todoList', JSON.stringify(todoList));    
+}
 
 /**
  * Adds task to todo list.
@@ -19,6 +27,7 @@ function addTask(name, done) {
         name: name,
         done: done
     });
+    saveTodoList();
     return id;
 }
 
@@ -30,6 +39,7 @@ function deleteTask(id) {
     todoList = todoList.filter(function (task) {
         return task.id !== id;
     });
+    saveTodoList();
 }
 
 /**
@@ -56,6 +66,7 @@ function editTaskStatus(id, status) {
     });
     if (todoIndex === -1) return;
     todoList[todoIndex].done = status;
+    saveTodoList();
 }
 
 
@@ -136,3 +147,6 @@ clearAllButton.addEventListener("click", function(e) {
     renderList();
     renderCount();
 })
+
+renderList();
+renderCount();
