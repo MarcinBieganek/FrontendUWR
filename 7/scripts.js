@@ -2,6 +2,7 @@ const addForm = document.getElementById("add_form");
 const newNameInput = document.getElementById("todo_new_name");
 const todoListHtml = document.getElementById("todo__list");
 const clearAllButton = document.getElementById("clear_all__button");
+const countHeader = document.getElementById("todo_list__header");
 
 let todoList = [];
 
@@ -80,11 +81,12 @@ function editTaskStatus(id, status) {
     doneButton.classList.add("button", "todo_done__button");
     doneButton.innerText = doneButtonText(done);
     doneButton.addEventListener("click", function (e) {
-        const newStatus = !getTaskStatus(id);
-        editTaskStatus(id, newStatus);
-        doneButton.innerText = doneButtonText(newStatus);
-        if (newStatus) todo.classList.add("todo__element-done");
+        const newDone = !getTaskStatus(id);
+        editTaskStatus(id, newDone);
+        doneButton.innerText = doneButtonText(newDone);
+        if (newDone) todo.classList.add("todo__element-done");
         else todo.classList.remove("todo__element-done");
+        renderCount();
     })
     
     const deleteButton = document.createElement("button");
@@ -94,6 +96,7 @@ function editTaskStatus(id, status) {
     deleteButton.addEventListener("click", function (e) {
         deleteTask(id);
         todo.remove();
+        renderCount();
     })
 
     todo.append(doneButton, deleteButton);
@@ -110,14 +113,26 @@ function renderList() {
     });
 }
 
+/**
+ * Renders html count of todos.
+ */
+function renderCount() {
+    const todosNotDone = todoList.filter(function (task) {
+        return !task.done;
+    }).length;
+    countHeader.innerText = `${todosNotDone} tasks remaining`;
+}
+
 addForm.addEventListener("submit", function(e) {
     e.preventDefault();
     addTask(newNameInput.value, false);
     newNameInput.value = "";
     renderList();
+    renderCount();
 })
 
 clearAllButton.addEventListener("click", function(e) {
     todoList = [];
     renderList();
+    renderCount();
 })
