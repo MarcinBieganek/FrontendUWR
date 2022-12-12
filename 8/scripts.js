@@ -133,7 +133,7 @@ function renderList() {
 
 
 /**
- * When window is loaded all tasks are rendered.
+ * When window is loaded pokemon list is rendered.
  */
 window.addEventListener("load", async function(e) {
     await getPokemonList();
