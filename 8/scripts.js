@@ -8,11 +8,11 @@ const detailsDescHtml = document.getElementById("details__description");
 let pokemonList = [];
 
 /**
- * Returns pokemon details object from API.
- * @param {string} url - Pokemon url.
- * @returns {Object} Pokemon details.
+ * Returns pokemon data object from API.
+ * @param {string} url - Url.
+ * @returns {Object} Dtails.
  */
-async function getPokemonDetails(url) {
+async function getPokemonData(url) {
     const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -32,14 +32,16 @@ async function getPokemonDetails(url) {
  * @param {string} pokemonUrl - Pokemon url. 
  */
 async function updateDetails(pokemonUrl) {
-    let pokemonDetails = await getPokemonDetails(pokemonUrl);
+    let pokemonDetails = await getPokemonData(pokemonUrl);
+    let pokemonSpecies = await getPokemonData(pokemonDetails.species.url);
 
     detailsHeaderHtml.innerText = pokemonDetails.name;
     detailsImgHtml.src = pokemonDetails.sprites.front_default;
     typesListHtml.innerHTML = '';
-    typesList.map(function (type) {
-        typesListHtml.append(`<li class="types__element">${type}</li>`);
-    });
+    typesListHtml.innerHTML = pokemonDetails.types.map(function (type) {
+        return `<li class="types__element">${type.type.name}</li>`;
+    }).join('');
+    detailsDescHtml.innerHTML = pokemonSpecies.flavor_text_entries[0].flavor_text;
 }
 
 /**
@@ -60,7 +62,7 @@ function createPokemon(name, url) {
     detailsButton.innerText = "Details";
     // On click task status is changed
     detailsButton.addEventListener("click", function (e) {
-        alert(url);
+        updateDetails(url);
     })
 
     // Button added to details element
