@@ -102,3 +102,11 @@ html {
     margin-top: 0;
     width: 80%;
 }
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: red;
+}

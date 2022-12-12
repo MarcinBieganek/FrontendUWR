@@ -4,8 +4,12 @@ const detailsHeaderHtml = document.getElementById("details__header");
 const detailsImgHtml = document.getElementById("details__image");
 const typesListHtml = document.getElementById("types__list");
 const detailsDescHtml = document.getElementById("details__description");
+const detailsErrorHtml = document.getElementById("details__error");
+const listErrorHtml = document.getElementById("list__error");
 
 let pokemonList = [];
+let getPokemonDataOk = true;
+let getPokemonListOk = true;
 
 /**
  * Returns pokemon data object from API.
@@ -13,17 +17,22 @@ let pokemonList = [];
  * @returns {Object} Dtails.
  */
 async function getPokemonData(url) {
-    const response = await fetch(url, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
+    let response;
+    try {
+        response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        getPokemonDataOk = response.ok;
+    } catch (error) {
+        getPokemonDataOk = false;
+    }
 
-    console.log(response.ok);
+    if(!getPokemonDataOk) return;
 
     const data = await response.json();
-
     return data;
 }
 
@@ -33,15 +42,31 @@ async function getPokemonData(url) {
  */
 async function updateDetails(pokemonUrl) {
     let pokemonDetails = await getPokemonData(pokemonUrl);
-    let pokemonSpecies = await getPokemonData(pokemonDetails.species.url);
 
-    detailsHeaderHtml.innerText = pokemonDetails.name;
-    detailsImgHtml.src = pokemonDetails.sprites.front_default;
-    typesListHtml.innerHTML = '';
-    typesListHtml.innerHTML = pokemonDetails.types.map(function (type) {
-        return `<li class="types__element">${type.type.name}</li>`;
-    }).join('');
-    detailsDescHtml.innerHTML = pokemonSpecies.flavor_text_entries[0].flavor_text;
+    if(getPokemonDataOk) {
+        let pokemonSpecies = await getPokemonData(pokemonDetails.species.url);
+
+        detailsErrorHtml.classList.add("hidden");
+        detailsHeaderHtml.classList.remove("hidden");
+        detailsImgHtml.classList.remove("hidden");
+        typesListHtml.classList.remove("hidden");
+        detailsDescHtml.classList.remove("hidden");
+
+        detailsHeaderHtml.innerText = pokemonDetails.name;
+        detailsImgHtml.src = pokemonDetails.sprites.front_default;
+        typesListHtml.innerHTML = '';
+        typesListHtml.innerHTML = pokemonDetails.types.map(function (type) {
+            return `<li class="types__element">${type.type.name}</li>`;
+        }).join('');
+        detailsDescHtml.innerHTML = pokemonSpecies.flavor_text_entries[0].flavor_text;
+    } else {
+        detailsErrorHtml.classList.remove("hidden");
+
+        detailsHeaderHtml.classList.add("hidden");
+        detailsImgHtml.classList.add("hidden");
+        typesListHtml.classList.add("hidden");
+        detailsDescHtml.classList.add("hidden");
+    }
 }
 
 /**
@@ -70,18 +95,27 @@ function createPokemon(name, url) {
     return pokemon;
 }
 
+/**
+ * Download pokemon list from API.
+ * @param {string} url - Url.
+ */
 async function getPokemonList() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
+    let response;
+    try {
+        response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        getPokemonListOk = response.ok;
+    } catch (error) {
+        getPokemonListOk = false;
+    }
 
-    console.log(response.ok);
+    if(!getPokemonListOk) return;
 
     const data = await response.json();
-
     pokemonList = data.results;
 }
 
@@ -103,5 +137,12 @@ function renderList() {
  */
 window.addEventListener("load", async function(e) {
     await getPokemonList();
-    renderList();
+    if(getPokemonListOk) {
+        listErrorHtml.classList.add("hidden");
+        pokemonListHtml.classList.remove("hidden");
+        renderList();
+    } else {
+        listErrorHtml.classList.remove("hidden");
+        pokemonListHtml.classList.add("hidden");
+    }
 })
