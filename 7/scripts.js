@@ -6,7 +6,7 @@ const clearAllButton = document.getElementById("clear_all__button");
 const countHeader = document.getElementById("todo_list__header");
 
 // todo list with task objects
-let todoList = JSON.parse(localStorage.getItem('todoList'));
+let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
 if (todoList === null) todoList = [];
 
 /**
